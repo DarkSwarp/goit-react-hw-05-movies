@@ -1,16 +1,13 @@
-import Home from 'Pages/Home';
-import Movies from 'Pages/Movies';
-import { Link, Route, Routes } from 'react-router-dom';
-import MovieDetails from 'Pages/MovieDetails';
-import Cast from 'components/Cast/Cast';
-import Reviews from 'components/Reviews/Reviews';
 
-// console.log(
-//   fetchTrending().then(data => {
-//     return data.results;
-//   })
-// );
-// console.log(fetchTrending());
+import { Link, Route, Routes } from 'react-router-dom';
+import { Suspense, lazy } from 'react';
+import Loader from 'components/Loader/Loader';
+
+const Home = lazy(() => import('Pages/Home'));
+const Movies = lazy(() => import('Pages/Movies'));
+const MovieDetails = lazy(() => import('Pages/MovieDetails'));
+const Cast = lazy(() => import('components/Cast/Cast'));
+const Reviews = lazy(() => import('components/Reviews/Reviews'));
 
 export const App = () => {
   return (
@@ -25,14 +22,16 @@ export const App = () => {
           </li>
         </ul>
       </nav>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/movies" element={<Movies />} />
-        <Route path="/movies/:movieId" element={<MovieDetails />}>
-          <Route path="cast" element={<Cast />} />
-          <Route path="reviews" element={<Reviews />} />
-        </Route>
-      </Routes>
+      <Suspense fallback={<Loader />}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/movies" element={<Movies />} />
+          <Route path="/movies/:movieId" element={<MovieDetails />}>
+            <Route path="cast" element={<Cast />} />
+            <Route path="reviews" element={<Reviews />} />
+          </Route>
+        </Routes>
+      </Suspense>
     </>
   );
 };

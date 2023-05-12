@@ -29,6 +29,9 @@ export default function Cast() {
       <>
         {isLoading && <Loader />}
         {error && <p>Something went wrong, reload the page</p>}
+        {!isLoading && !error && actors.length === 0 && (
+          <p>Unfortunately, there is no information about the actors.</p>
+        )}
         {!isLoading && !error && actors.length > 0 && (
           <ul>
             {actors.map(actor => {
@@ -37,7 +40,15 @@ export default function Cast() {
                   {actor.profile_path && (
                     <img
                       src={`https://image.tmdb.org/t/p/w200${actor.profile_path}`}
-                      alt={`${actor.name} profile`}
+                      alt=""
+                    />
+                  )}
+                  {!actor.profile_path && (
+                    <img
+                      width="200"
+                      height="300"
+                      src={`https://kartinki.pibig.info/uploads/posts/2023-04/1681549820_kartinki-pibig-info-p-zaglushka-kartinka-arti-krasivo-2.jpg`}
+                      alt=""
                     />
                   )}
 

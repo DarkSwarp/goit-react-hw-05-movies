@@ -16,8 +16,6 @@ export default function Reviews() {
         setError(false);
         const { results } = await fetchReview(movieId);
         setReviews(results);
-
-        console.log(results);
       } catch (error) {
         setError(true);
       } finally {
@@ -32,6 +30,9 @@ export default function Reviews() {
     <>
       {isLoading && <Loader />}
       {error && <p>Something went wrong, reload the page</p>}
+      {!isLoading && !error && reviews.length === 0 && (
+        <p>Sorry, no reviews available.</p>
+      )}
       {!isLoading && !error && reviews.length > 0 && (
         <ul>
           {reviews.map(review => {

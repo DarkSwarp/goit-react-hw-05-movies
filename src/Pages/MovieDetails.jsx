@@ -1,7 +1,7 @@
-import { Link, Outlet, useParams } from 'react-router-dom';
+import { Link, Outlet, useLocation, useParams } from 'react-router-dom';
 import { fetchMovie } from 'api';
 import Loader from 'components/Loader/Loader';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 export default function MovieDetails() {
   const [movie, setMovie] = useState([]);
@@ -9,6 +9,8 @@ export default function MovieDetails() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
   const { movieId } = useParams();
+  const location = useLocation();
+  const backLinkHref = useRef(location.state?.from ?? '/movies');
   useEffect(() => {
     const fetchOneMovie = async () => {
       try {
@@ -32,7 +34,18 @@ export default function MovieDetails() {
       {error && <p>Something went wrong, reload the page</p>}
       {!isLoading && !error && (
         <>
+          <p>
+            <Link to={backLinkHref.current}>Go Back</Link>
+          </p>
           {movie.poster_path && <img src={poster} alt="" />}
+          {!movie.poster_path && (
+            <img
+              src="https://kartinki.pibig.info/uploads/posts/2023-04/1681549820_kartinki-pibig-info-p-zaglushka-kartinka-arti-krasivo-2.jpg"
+              alt=""
+              width="400"
+              height="600"
+            />
+          )}
           <>
             <h1>
               {movie.title} (

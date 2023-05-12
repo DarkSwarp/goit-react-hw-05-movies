@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { fetchSearchMovies } from 'api';
 import Loader from 'components/Loader/Loader';
@@ -11,18 +11,14 @@ export default function Movies() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
 
-  const handlSubmit = e => {
-    e.preventDefault();
+  useEffect(() => {
     if (query) {
-      console.log(query);
       const fetchQueryMovies = async () => {
         try {
           setIsLoading(true);
           setError(false);
           const { results } = await fetchSearchMovies(1, query);
           setSearchMovies(results);
-          e.target[0].value = '';
-          //   console.dir();
         } catch (error) {
           setError(true);
         } finally {
@@ -32,6 +28,12 @@ export default function Movies() {
 
       fetchQueryMovies();
     }
+  }, [query]);
+
+  const handlSubmit = e => {
+    e.preventDefault();
+    setSearchParams({ query: e.target[0].value });
+    e.target[0].value = '';
   };
 
   return (
@@ -40,9 +42,6 @@ export default function Movies() {
         <input
           type="text"
           name="query"
-          onChange={e => {
-            setSearchParams({ query: e.target.value });
-          }}
         />
         <button type="submit">Search</button>
       </form>
