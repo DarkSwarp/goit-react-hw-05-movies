@@ -1,0 +1,17 @@
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  list-style: none;
+  padding: 0;
+  margin-top: 10px;
+  margin-bottom: 0;
+}
+
+.author {
+  margin: 0;
+  margin-bottom: 10px;
+}
+.content {
+  margin: 0;
+}

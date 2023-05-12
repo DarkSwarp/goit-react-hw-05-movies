@@ -1,7 +1,23 @@
-
-import { Link, Route, Routes } from 'react-router-dom';
+import { NavLink, Route, Routes } from 'react-router-dom';
 import { Suspense, lazy } from 'react';
 import Loader from 'components/Loader/Loader';
+import css from './App.module.css';
+import styled from 'styled-components';
+
+const StyledNavLink = styled(NavLink)`
+  font-size: 20px;
+  font-weight: 700;
+  text-decoration: none;
+  color: black;
+  transition: color 0.2s ease-in-out;
+
+  &.active,
+  &:hover,
+  &:focus {
+    color: orange;
+    text-decoration: underline;
+  }
+`;
 
 const Home = lazy(() => import('Pages/Home'));
 const Movies = lazy(() => import('Pages/Movies'));
@@ -12,19 +28,28 @@ const Reviews = lazy(() => import('components/Reviews/Reviews'));
 export const App = () => {
   return (
     <>
-      <nav>
-        <ul>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/movies">Movies</Link>
-          </li>
-        </ul>
-      </nav>
+      <header className={css.header}>
+        <nav>
+          <ul className={css.list}>
+            <li>
+              <StyledNavLink to="/">Home</StyledNavLink>
+            </li>
+            <li>
+              <StyledNavLink to="/movies">Movies</StyledNavLink>
+            </li>
+          </ul>
+        </nav>
+      </header>
       <Suspense fallback={<Loader />}>
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route
+            path="/"
+            element={
+              <main>
+                <Home />
+              </main>
+            }
+          />
           <Route path="/movies" element={<Movies />} />
           <Route path="/movies/:movieId" element={<MovieDetails />}>
             <Route path="cast" element={<Cast />} />

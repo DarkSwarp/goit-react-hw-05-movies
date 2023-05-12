@@ -2,6 +2,7 @@ import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { fetchReview } from 'api';
 import Loader from 'components/Loader/Loader';
+import css from './Reviews.module.css';
 
 export default function Reviews() {
   const [reviews, setReviews] = useState([]);
@@ -34,12 +35,12 @@ export default function Reviews() {
         <p>Sorry, no reviews available.</p>
       )}
       {!isLoading && !error && reviews.length > 0 && (
-        <ul>
+        <ul className={css.list}>
           {reviews.map(review => {
             return (
               <li key={review.id}>
-                <h3>{review.author}</h3>
-                <p>{review.content}</p>
+                <h3 className={css.author}>{review.author}</h3>
+                <p className={css.content}>{review.content}</p>
               </li>
             );
           })}
