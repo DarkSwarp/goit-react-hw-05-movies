@@ -11,3 +11,8 @@
   border-bottom: 2px solid grey;
   box-shadow: 2px 2px 5px 1px;
 }
+.wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

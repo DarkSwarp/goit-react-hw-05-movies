@@ -29,7 +29,7 @@ export default function Reviews() {
 
   return (
     <>
-      {isLoading && <Loader />}
+      <div className={css.wrap}>{isLoading && <Loader />}</div>
       {error && <p>Something went wrong, reload the page</p>}
       {!isLoading && !error && reviews.length === 0 && (
         <p>Sorry, no reviews available.</p>

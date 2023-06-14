@@ -1,9 +1,11 @@
 .container {
   padding: 10px 30px;
 }
-.btn {
-  display: block;
-  margin-bottom: 10px;
+
+.btnText {
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.7;
 }
 .img {
   width: 200px;
@@ -12,34 +14,52 @@
 .info {
   display: flex;
   gap: 15px;
-  padding-bottom: 10px;
+  padding: 10px 10px;
+
   border-bottom: 2px solid grey;
   box-shadow: 2px 2px 5px 1px;
+  margin-top: 10px;
 }
 .title {
   margin: 0;
+  line-height: 1.7;
 }
 .score,
 .overviewTitle,
-.overview {
+.overview,
+.genres {
   margin-top: 15px;
   margin-bottom: 0;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.7;
 }
 .containerLink {
-  padding-top: 10px;
+  padding: 10px 10px;
   border-bottom: 2px solid grey;
   box-shadow: 2px 2px 5px 1px;
 }
+.wrapLoader{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+}
 .text {
   margin: 0;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.7;
 }
 
 .list {
   display: flex;
-  flex-direction: column;
-  gap: 10px;
+  gap: 20px;
   list-style: none;
   padding: 0;
-  margin-top: 10px;
-  margin-bottom: 0;
 }

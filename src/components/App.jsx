@@ -1,7 +1,7 @@
 import { NavLink, Route, Routes } from 'react-router-dom';
 import { Suspense, lazy } from 'react';
 import Loader from 'components/Loader/Loader';
-// import css from './App.module.css';
+import css from './App.module.css';
 import styled from 'styled-components';
 import { Toolbar, AppBar, Typography, Container } from '@mui/material';
 
@@ -40,7 +40,13 @@ export const App = () => {
           </Typography>
         </Toolbar>
       </AppBar>
-      <Suspense fallback={<Loader />}>
+      <Suspense
+        fallback={
+          <div className={css.wrap}>
+            <Loader />
+          </div>
+        }
+      >
         <Routes>
           <Route
             path="/"

@@ -4,7 +4,7 @@ import { fetchSearchMovies } from 'api';
 import Loader from 'components/Loader/Loader';
 import MoviesList from 'components/MoviesList/MoviesList';
 import css from './Movies.module.css';
-import { Button, Box, TextField } from '@mui/material';
+import { Button, TextField } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 
 export default function Movies() {
@@ -56,9 +56,8 @@ export default function Movies() {
         >
           Search
         </Button>
-        {/* <button type="submit">Search</button> */}
       </form>
-      {isLoading && <Loader />}
+      <div className={css.wrap}>{isLoading && <Loader />}</div>
       {error && <p>Something went wrong, reload the page</p>}
       {!isLoading && !error && searchMovies.length > 0 && (
         <MoviesList movies={searchMovies} />

@@ -4,10 +4,12 @@ import Loader from 'components/Loader/Loader';
 import { useState, useEffect, useRef } from 'react';
 import css from './MovieDetails.module.css';
 import styled from 'styled-components';
+import { Button } from '@mui/material';
 
 const StyledNavLink = styled(NavLink)`
-  font-size: 14px;
-  font-weight: 500;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.7;
   text-decoration: none;
   color: black;
   transition: color 0.2s ease-in-out;
@@ -47,14 +49,16 @@ export default function MovieDetails() {
   }, [movieId]);
   return (
     <>
-      {isLoading && <Loader />}
+      <div className={css.wrapLoader}>{isLoading && <Loader />}</div>
       {error && <p>Something went wrong, reload the page</p>}
       {!isLoading && !error && (
         <main>
           <div className={css.container}>
-            <button type="button" className={css.btn}>
-              <Link to={backLinkHref.current}>Go Back</Link>
-            </button>
+            <Button type="button" variant="contained">
+              <Link to={backLinkHref.current}>
+                <span className={css.btnText}>Go Back</span>
+              </Link>
+            </Button>
             <div className={css.info}>
               {movie.poster_path && (
                 <img src={poster} alt="" className={css.img} />
@@ -75,9 +79,9 @@ export default function MovieDetails() {
                   User Score:{' '}
                   {movie.vote_average && Math.round(movie.vote_average * 10)}%
                 </p>
-                <h3 className={css.overviewTitle}>Overview</h3>
+                <h3>Overview</h3>
                 <p className={css.overview}>{movie.overview}</p>
-                <h3 className={css.genresTitle}>Genres</h3>
+                <h3>Genres</h3>
                 <p className={css.genres}>
                   {movie.genres &&
                     movie.genres.map(genre => genre.name).join(', ')}
@@ -85,15 +89,17 @@ export default function MovieDetails() {
               </div>
             </div>
             <div className={css.containerLink}>
-              <p className={css.text}>Additional information</p>
-              <ul className={css.list}>
-                <li>
-                  <StyledNavLink to="cast">Cast</StyledNavLink>
-                </li>
-                <li>
-                  <StyledNavLink to="reviews">Reviews</StyledNavLink>
-                </li>
-              </ul>
+              <div className={css.wrap}>
+                <p className={css.text}>Additional information:</p>
+                <ul className={css.list}>
+                  <li>
+                    <StyledNavLink to="cast">Cast</StyledNavLink>
+                  </li>
+                  <li>
+                    <StyledNavLink to="reviews">Reviews</StyledNavLink>
+                  </li>
+                </ul>
+              </div>
               <Outlet />
             </div>
           </div>

@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { fetchTrendMovies } from 'api';
 import Loader from 'components/Loader/Loader';
 import MoviesList from 'components/MoviesList/MoviesList';
+import css from './Home.module.css';
 
 export default function Home() {
   const [trendMovies, setTrendMovies] = useState([]);
@@ -27,7 +28,7 @@ export default function Home() {
 
   return (
     <>
-      {isLoading && <Loader />}
+      <div className={css.wrap}>{isLoading && <Loader />}</div>
       {error && <p>Something went wrong, reload the page</p>}
       {!isLoading && !error && trendMovies.length > 0 && (
         <MoviesList movies={trendMovies} />

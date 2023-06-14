@@ -28,7 +28,7 @@ export default function Cast() {
   }, [movieId]);
   return (
     <>
-      {isLoading && <Loader />}
+      <div className={css.wrap}>{isLoading && <Loader />}</div>
       {error && <p>Something went wrong, reload the page</p>}
       {!isLoading && !error && actors.length === 0 && (
         <p>Unfortunately, there is no information about the actors.</p>
@@ -38,23 +38,25 @@ export default function Cast() {
           {actors.map(actor => {
             return (
               <li key={actor.id}>
-                {actor.profile_path && (
-                  <img
-                    className={css.img}
-                    src={`https://image.tmdb.org/t/p/w200${actor.profile_path}`}
-                    alt=""
-                  />
-                )}
-                {!actor.profile_path && (
-                  <img
-                    className={css.img}
-                    src={`https://kartinki.pibig.info/uploads/posts/2023-04/1681549820_kartinki-pibig-info-p-zaglushka-kartinka-arti-krasivo-2.jpg`}
-                    alt=""
-                  />
-                )}
+                <div className={css.container}>
+                  {actor.profile_path && (
+                    <img
+                      className={css.img}
+                      src={`https://image.tmdb.org/t/p/w200${actor.profile_path}`}
+                      alt=""
+                    />
+                  )}
+                  {!actor.profile_path && (
+                    <img
+                      className={css.img}
+                      src={`https://basket-04.wb.ru/vol593/part59393/59393971/images/big/1.jpg`}
+                      alt=""
+                    />
+                  )}
 
-                <p className={css.name}>{actor.name}</p>
-                <p className={css.character}>Character {actor.character}</p>
+                  <p className={css.name}>{actor.name}</p>
+                  <p className={css.character}>Character {actor.character}</p>
+                </div>
               </li>
             );
           })}
