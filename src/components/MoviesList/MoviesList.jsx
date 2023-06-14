@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import css from './MoviesList.module.css';
 
 const StyledNavLink = styled(NavLink)`
-  font-size: 16px;
+  font-size: 20px;
   font-weight: 500;
   text-decoration: none;
   color: black;

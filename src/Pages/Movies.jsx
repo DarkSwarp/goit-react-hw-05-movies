@@ -4,6 +4,8 @@ import { fetchSearchMovies } from 'api';
 import Loader from 'components/Loader/Loader';
 import MoviesList from 'components/MoviesList/MoviesList';
 import css from './Movies.module.css';
+import { Button, Box, TextField } from '@mui/material';
+import SearchIcon from '@mui/icons-material/Search';
 
 export default function Movies() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -40,10 +42,21 @@ export default function Movies() {
   return (
     <main>
       <form onSubmit={handlSubmit} className={css.form}>
-        <input type="text" name="query" />
-        <button type="submit">
+        <TextField
+          type="text"
+          name="query"
+          id="outlined-basic"
+          variant="outlined"
+          size="small"
+        />
+        <Button
+          variant="contained"
+          type="outlined"
+          startIcon={<SearchIcon fontSize="large" />}
+        >
           Search
-        </button>
+        </Button>
+        {/* <button type="submit">Search</button> */}
       </form>
       {isLoading && <Loader />}
       {error && <p>Something went wrong, reload the page</p>}

@@ -1,11 +1,12 @@
 import { NavLink, Route, Routes } from 'react-router-dom';
 import { Suspense, lazy } from 'react';
 import Loader from 'components/Loader/Loader';
-import css from './App.module.css';
+// import css from './App.module.css';
 import styled from 'styled-components';
+import { Toolbar, AppBar, Typography, Container } from '@mui/material';
 
 const StyledNavLink = styled(NavLink)`
-  font-size: 20px;
+  font-size: 24px;
   font-weight: 700;
   text-decoration: none;
   color: black;
@@ -27,19 +28,18 @@ const Reviews = lazy(() => import('components/Reviews/Reviews'));
 
 export const App = () => {
   return (
-    <>
-      <header className={css.header}>
-        <nav>
-          <ul className={css.list}>
-            <li>
-              <StyledNavLink to="/">Home</StyledNavLink>
-            </li>
-            <li>
-              <StyledNavLink to="/movies">Movies</StyledNavLink>
-            </li>
-          </ul>
-        </nav>
-      </header>
+    <Container>
+      <AppBar position="static">
+        <Toolbar>
+          <Typography sx={{ mr: 5 }}>
+            <StyledNavLink to="/">Home</StyledNavLink>
+          </Typography>
+
+          <Typography sx={{ flexGrow: 1 }}>
+            <StyledNavLink to="/movies">Movies</StyledNavLink>
+          </Typography>
+        </Toolbar>
+      </AppBar>
       <Suspense fallback={<Loader />}>
         <Routes>
           <Route
@@ -57,6 +57,6 @@ export const App = () => {
           </Route>
         </Routes>
       </Suspense>
-    </>
+    </Container>
   );
 };
